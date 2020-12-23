@@ -1,6 +1,6 @@
 [discord]
 package_name = "Discord"
-package_description = "A proprietary instant messaging platform. It is HIGHLY recommended to use BetterDiscord or Powercord."
+package_description = "A proprietary instant messaging platform. It is HIGHLY recommended to use BetterDiscord or Powercord.\nTODO: Prompt for BetterDiscord installation and install it if user agrees."
 package_version = "0.0.13"
 package_url = "https://discord.com/api/download?platform=linux&format=tar.gz"
 
