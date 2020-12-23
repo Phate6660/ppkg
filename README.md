@@ -3,6 +3,8 @@
 A package manager written in Rust.<br>
 It will initially be a binary package manager, but I plan on making it a hybrid.
 
+About the name: ppkg / Phate's Package Manager is a double entendre. Surely you can figure it out. ;)
+
 Prerequisites:
 - `mkdir -pv "$HOME/.ppkg/{downloads,opt}"`
 - `cp config.toml $HOME/.ppkg/`
