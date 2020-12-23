@@ -24,7 +24,7 @@ struct Package {
 fn main() {
     let home = std::env::var("HOME").unwrap();
     let config_path = format!("{}/.ppkg/config.toml", home);
-    let config: Config = toml::from_str(&std::fs::read_to_string(config_path).unwrap()).unwrap();
+    let config_path: &str = &config_path[..];
     let matches = clap::App::new("ppkg")
         .version("0.1.0")
         .author("Phate6660 <https://Phate6660.codeberg.page>")
@@ -47,6 +47,7 @@ fn main() {
                     .help("List Packages currently installed.")))
         .get_matches();
     if matches.is_present("install") {
+        let config: Config = toml::from_str(&std::fs::read_to_string(config_path).unwrap()).unwrap();
         let pkg = matches.value_of("install");
 
         let name = if pkg == serde::export::Some("Discord") {
@@ -115,27 +116,35 @@ fn main() {
     }
     if let Some(matches) = matches.subcommand_matches("list") {
         if matches.is_present("available") {
-            // println!(
-            //     "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
-            //     config.firefox32.package_name,
-            //     config.firefox32.package_description,
-            //     config.firefox32.package_version,
-            //     config.firefox32.package_url,
-            // );
-            // println!(
-            //     "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
-            //     config.firefox64.package_name,
-            //     config.firefox64.package_description,
-            //     config.firefox64.package_version,
-            //     config.firefox64.package_url,
-            // );
-            // println!(
-            //     "Name: {}\nDescription: {}\nVersion: {}\nURL: {}",
-            //     config.palemoon.package_name,
-            //     config.palemoon.package_description,
-            //     config.palemoon.package_version,
-            //     config.palemoon.package_url,
-            // );
+            let config: Config = toml::from_str(&std::fs::read_to_string(config_path).unwrap()).unwrap();
+            println!(
+                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
+                config.discord.package_name,
+                config.discord.package_description,
+                config.discord.package_version,
+                config.discord.package_url,
+            );
+            println!(
+                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
+                config.firefox32.package_name,
+                config.firefox32.package_description,
+                config.firefox32.package_version,
+                config.firefox32.package_url,
+            );
+            println!(
+                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
+                config.firefox64.package_name,
+                config.firefox64.package_description,
+                config.firefox64.package_version,
+                config.firefox64.package_url,
+            );
+            println!(
+                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}",
+                config.palemoon.package_name,
+                config.palemoon.package_description,
+                config.palemoon.package_version,
+                config.palemoon.package_url,
+            );
         } else if matches.is_present("installed") {
             // TODO
         } else {
