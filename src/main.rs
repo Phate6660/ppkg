@@ -106,10 +106,10 @@ fn main() {
 
             // Create the download path
             let path = format!("{}/.ppkg/downloads/", home);
-            let path_str: &str = &path[..];
+            let path: &str = &path[..];
 
             // Set the file name to the full path
-            let fname = [path_str, fname].concat();
+            let fname = [path, fname].concat();
             let fname: &str = &fname[..];
             println!("Will be located at: '{:?}'", fname);
 
