@@ -13,6 +13,8 @@ Current list of packages:
 - Discord
 - Firefox x32
 - Firefox x64
+- Github CLI x32
+- Github CLI x64
 - Pale Moon
 
 Current list of commands:

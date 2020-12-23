@@ -16,6 +16,18 @@ package_description = "Not the best browser, but better than some other choices 
 package_version = "84.0.1"
 package_url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
 
+[ghcli32]
+package_name = "Github CLI x32"
+package_description = "The official CLI for Github."
+package_version = "1.4.0"
+package_url = "https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_386.tar.gz"
+
+[ghcli64]
+package_name = "Github CLI x64"
+package_description = "The official CLI for Github."
+package_version = "1.4.0"
+package_url = "https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_amd64.tar.gz"
+
 [palemoon]
 package_name = "Pale Moon"
 package_description = "The best web browser. NOTE: Only 64-bit is supported upstream, please compile from source if you require 32-bit."
