@@ -1,6 +1,7 @@
 use clap::{Arg, SubCommand};
 use compress_tools::*;
 use serde_derive::Deserialize;
+use std::fs;
 use std::fs::File;
 use std::io::copy;
 use std::path::Path;
@@ -106,7 +107,7 @@ fn main() {
             copy(&mut response, &mut dest).unwrap(); // Stick the contents in the file
 
             // Extract the archive
-            let extraction_path = format!("{}/.ppkg/opt/", home);
+            let extraction_path = format!("{}/.ppkg/opt/{}", home, name);
             println!("Extracting the tarball to {}.", extraction_path);
             let mut source = File::open(fname).expect("Could not open archive");
             let dest = Path::new(&extraction_path);
@@ -146,7 +147,24 @@ fn main() {
                 config.palemoon.package_url,
             );
         } else if matches.is_present("installed") {
-            // TODO
+            let config: Config = toml::from_str(&std::fs::read_to_string(config_path).unwrap()).unwrap();
+            let install_path_discord = format!("{}/.ppkg/opt/{}", home, config.discord.package_name);
+            let install_path_firefox32 = format!("{}/.ppkg/opt/{}", home, config.firefox32.package_name);
+            let install_path_firefox64 = format!("{}/.ppkg/opt/{}", home, config.firefox64.package_name);
+            let install_path_palemoon = format!("{}/.ppkg/opt/{}", home, config.palemoon.package_name);
+            println!("Packages installed:");
+            if fs::metadata(install_path_discord).is_ok() {
+                println!("- Discord");
+            }
+            if fs::metadata(install_path_firefox32).is_ok() {
+                println!("- Firefox x32");
+            }
+            if fs::metadata(install_path_firefox64).is_ok() {
+                println!("- Firefox x64");
+            }
+            if fs::metadata(install_path_palemoon).is_ok() {
+                println!("- Pale Moon");
+            }
         } else {
             println!("Invalid option!");
         }
