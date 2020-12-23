@@ -14,10 +14,8 @@ Prerequisites:
 
 Current list of packages:
 - Discord
-- Firefox x32
-- Firefox x64
-- Github CLI x32
-- Github CLI x64
+- Firefox
+- Github CLI
 - Pale Moon
 
 Current list of commands:
@@ -44,6 +42,18 @@ Extracting the tarball to /home/valley/.ppkg/opt/Pale Moon.
 Finished extracting!
 ```
 
+Some packages supports multiple arches, in which case you get an interaction like this:
+
+`$ ppkg -i "Firefox"` (the second line is user input)
+
+```
+This package support 32-bit and 64-bit, please choose a version. (x32 or x64)
+x64
+File to download: 'firefox-84.0.1.tar.bz2'
+Will be located at: '"/home/valley/.ppkg/downloads/firefox-84.0.1.tar.bz2"'
+Extracting the tarball to /home/valley/.ppkg/opt/Firefox.
+```
+
 `$ ppkg list -a`
 
 ```
@@ -53,25 +63,17 @@ TODO: Prompt for BetterDiscord installation and install it if user agrees.
 Version: 0.0.13
 URL: https://discord.com/api/download?platform=linux&format=tar.gz
 
-Name: Firefox x32
+Name: Firefox
 Description: Not the best browser, but better than some other choices for sure.
 Version: 84.0.1
-URL: https://download.mozilla.org/?product=firefox-latest-ssl&os=linux&lang=en-US
+URL (x32): https://download.mozilla.org/?product=firefox-latest-ssl&os=linux&lang=en-US
+URL (x64): https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US
 
-Name: Firefox x64
-Description: Not the best browser, but better than some other choices for sure.
-Version: 84.0.1
-URL: https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US
-
-Name: Github CLI x32
+Name: Github CLI
 Description: The official CLI for Github.
 Version: 1.4.0
-URL: https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_386.tar.gz
-
-Name: Github CLI x64
-Description: The official CLI for Github.
-Version: 1.4.0
-URL: https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_amd64.tar.gz
+URL (x32): https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_386.tar.gz
+URL (x64): https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_amd64.tar.gz
 
 Name: Pale Moon
 Description: The best web browser. NOTE: Only 64-bit is supported upstream, please compile from source if you require 32-bit.
@@ -84,6 +86,6 @@ URL: https://linux.palemoon.org/datastore/release/palemoon-28.17.0.linux-x86_64-
 ```
 Packages installed:
 - Discord
-- Github CLI x64
+- Firefox
 - Pale Moon
 ```
