@@ -47,7 +47,7 @@ Some packages supports multiple arches, in which case you get an interaction lik
 `$ ppkg -i "Firefox"` (the second line is user input)
 
 ```
-This package support 32-bit and 64-bit, please choose a version. (x32 or x64)
+This package supports 32-bit and 64-bit, please choose a version. (x32 or x64)
 x64
 File to download: 'firefox-84.0.1.tar.bz2'
 Will be located at: '"/home/valley/.ppkg/downloads/firefox-84.0.1.tar.bz2"'
