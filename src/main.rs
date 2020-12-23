@@ -9,10 +9,8 @@ use std::path::Path;
 #[derive(Deserialize)]
 struct Config {
     discord: Package,
-    firefox32: Package,
-    firefox64: Package,
-    ghcli32: Package,
-    ghcli64: Package,
+    firefox: PackageMultiArch,
+    ghcli: PackageMultiArch,
     palemoon: Package,
 }
 
@@ -22,6 +20,15 @@ struct Package {
     package_description: String,
     package_version: String,
     package_url: String,
+}
+
+#[derive(Deserialize)]
+struct PackageMultiArch {
+    package_name: String,
+    package_description: String,
+    package_version: String,
+    package_url_32: String,
+    package_url_64: String,
 }
 
 fn main() {
@@ -55,14 +62,10 @@ fn main() {
 
         let name = if pkg == serde::export::Some("Discord") {
             config.discord.package_name
-        } else if pkg == serde::export::Some("Firefox x32") {
-            config.firefox32.package_name
-        } else if pkg == serde::export::Some("Firefox x64") {
-            config.firefox64.package_name
-        } else if pkg == serde::export::Some("Github CLI x32") {
-            config.ghcli32.package_name
-        } else if pkg == serde::export::Some("Github CLI x64") {
-            config.ghcli64.package_name
+        } else if pkg == serde::export::Some("Firefox") {
+            config.firefox.package_name
+        } else if pkg == serde::export::Some("Github CLI") {
+            config.ghcli.package_name
         } else if pkg == serde::export::Some("Pale Moon") {
             config.palemoon.package_name
         } else {
@@ -71,14 +74,32 @@ fn main() {
 
         let url = if name == "Discord" {
             config.discord.package_url
-        } else if name == "Firefox x32" {
-            config.firefox32.package_url
-        } else if name == "Firefox x64" {
-            config.firefox64.package_url
-        } else if name == "Github CLI x32" {
-            config.ghcli32.package_url
-        } else if name == "Github CLI x64" {
-            config.ghcli64.package_url
+        } else if name == "Firefox" {
+            println!("This package support 32-bit and 64-bit, please choose a version. (x32 or x64)");
+            let mut arch = String::new();
+            std::io::stdin()
+                .read_line(&mut arch)
+                .expect("Failed to read user input.");
+            if arch.trim() == "x32" {
+                config.firefox.package_url_32
+            } else if arch.trim() == "x64" {
+                config.firefox.package_url_64
+            } else {
+                panic!("You need to choose x32 or x64!");
+            }
+        } else if name == "Github CLI" {
+            println!("This package support 32-bit and 64-bit, please choose a version. (x32 or x64)");
+            let mut arch = String::new();
+            std::io::stdin()
+                .read_line(&mut arch)
+                .expect("Failed to read user input.");
+            if arch == "x32" {
+                config.ghcli.package_url_32
+            } else if arch == "x64" {
+                config.ghcli.package_url_64
+            } else {
+                panic!("You need to choose x32 or x64!");
+            }
         } else if name == "Pale Moon" {
             config.palemoon.package_url
         } else {
@@ -136,32 +157,20 @@ fn main() {
                 config.discord.package_url,
             );
             println!(
-                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
-                config.firefox32.package_name,
-                config.firefox32.package_description,
-                config.firefox32.package_version,
-                config.firefox32.package_url,
+                "Name: {}\nDescription: {}\nVersion: {}\nURL (x32): {}\nURL (x64): {}\n",
+                config.firefox.package_name,
+                config.firefox.package_description,
+                config.firefox.package_version,
+                config.firefox.package_url_32,
+                config.firefox.package_url_64,
             );
             println!(
-                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
-                config.firefox64.package_name,
-                config.firefox64.package_description,
-                config.firefox64.package_version,
-                config.firefox64.package_url,
-            );
-            println!(
-                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
-                config.ghcli32.package_name,
-                config.ghcli32.package_description,
-                config.ghcli32.package_version,
-                config.ghcli32.package_url,
-            );
-            println!(
-                "Name: {}\nDescription: {}\nVersion: {}\nURL: {}\n",
-                config.ghcli64.package_name,
-                config.ghcli64.package_description,
-                config.ghcli64.package_version,
-                config.ghcli64.package_url,
+                "Name: {}\nDescription: {}\nVersion: {}\nURL (x32): {}\nURL (x64): {}\n",
+                config.ghcli.package_name,
+                config.ghcli.package_description,
+                config.ghcli.package_version,
+                config.ghcli.package_url_32,
+                config.ghcli.package_url_64,
             );
             println!(
                 "Name: {}\nDescription: {}\nVersion: {}\nURL: {}",
@@ -173,26 +182,18 @@ fn main() {
         } else if matches.is_present("installed") {
             let config: Config = toml::from_str(&std::fs::read_to_string(config_path).unwrap()).unwrap();
             let install_path_discord = format!("{}/.ppkg/opt/{}", home, config.discord.package_name);
-            let install_path_firefox32 = format!("{}/.ppkg/opt/{}", home, config.firefox32.package_name);
-            let install_path_firefox64 = format!("{}/.ppkg/opt/{}", home, config.firefox64.package_name);
-            let install_path_ghcli32 = format!("{}/.ppkg/opt/{}", home, config.ghcli32.package_name);
-            let install_path_ghcli64 = format!("{}/.ppkg/opt/{}", home, config.ghcli64.package_name);
+            let install_path_firefox = format!("{}/.ppkg/opt/{}", home, config.firefox.package_name);
+            let install_path_ghcli = format!("{}/.ppkg/opt/{}", home, config.ghcli.package_name);
             let install_path_palemoon = format!("{}/.ppkg/opt/{}", home, config.palemoon.package_name);
             println!("Packages installed:");
             if fs::metadata(install_path_discord).is_ok() {
                 println!("- Discord");
             }
-            if fs::metadata(install_path_firefox32).is_ok() {
-                println!("- Firefox x32");
+            if fs::metadata(install_path_firefox).is_ok() {
+                println!("- Firefox");
             }
-            if fs::metadata(install_path_firefox64).is_ok() {
-                println!("- Firefox x64");
-            }
-            if fs::metadata(install_path_ghcli32).is_ok() {
-                println!("- Github CLI x32");
-            }
-            if fs::metadata(install_path_ghcli64).is_ok() {
-                println!("- Github CLI x64");
+            if fs::metadata(install_path_ghcli).is_ok() {
+                println!("- Github CLI");
             }
             if fs::metadata(install_path_palemoon).is_ok() {
                 println!("- Pale Moon");

@@ -4,29 +4,19 @@ package_description = "A proprietary instant messaging platform. It is HIGHLY re
 package_version = "0.0.13"
 package_url = "https://discord.com/api/download?platform=linux&format=tar.gz"
 
-[firefox32]
-package_name = "Firefox x32"
+[firefox]
+package_name = "Firefox"
 package_description = "Not the best browser, but better than some other choices for sure."
 package_version = "84.0.1"
-package_url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux&lang=en-US"
+package_url_32 = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux&lang=en-US"
+package_url_64 = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
 
-[firefox64]
-package_name = "Firefox x64"
-package_description = "Not the best browser, but better than some other choices for sure."
-package_version = "84.0.1"
-package_url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
-
-[ghcli32]
-package_name = "Github CLI x32"
+[ghcli]
+package_name = "Github CLI"
 package_description = "The official CLI for Github."
 package_version = "1.4.0"
-package_url = "https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_386.tar.gz"
-
-[ghcli64]
-package_name = "Github CLI x64"
-package_description = "The official CLI for Github."
-package_version = "1.4.0"
-package_url = "https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_amd64.tar.gz"
+package_url_32 = "https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_386.tar.gz"
+package_url_64 = "https://github.com/cli/cli/releases/download/v1.4.0/gh_1.4.0_linux_amd64.tar.gz"
 
 [palemoon]
 package_name = "Pale Moon"
