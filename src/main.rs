@@ -21,25 +21,9 @@ struct Package {
 }
 
 fn main() {
-    let config: Config = toml::from_str(r#"
-        [firefox32]
-        package_name = "Firefox x32"
-        package_description = "Not the best browser, but better than some other choices for sure."
-        package_version = "84.0.1"
-        package_url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux&lang=en-US"
-
-        [firefox64]
-        package_name = "Firefox x64"
-        package_description = "Not the best browser, but better than some other choices for sure."
-        package_version = "84.0.1"
-        package_url = "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
-
-        [palemoon]
-        package_name = "Pale Moon"
-        package_description = "The best web browser. NOTE: Only 64-bit is supported upstream, please compile from source if you require 32-bit."
-        package_version = "28.17.0"
-        package_url = "https://linux.palemoon.org/datastore/release/palemoon-28.17.0.linux-x86_64-gtk2.tar.xz"
-    "#).unwrap();
+    let home = std::env::var("HOME").unwrap();
+    let config_path = format!("{}/.ppkg/config.toml", home);
+    let config: Config = toml::from_str(&std::fs::read_to_string(config_path).unwrap()).unwrap();
     let matches = clap::App::new("ppkg")
         .version("0.1.0")
         .author("Phate6660 <https://Phate6660.codeberg.page>")
@@ -87,7 +71,6 @@ fn main() {
         if url == "Invalid Package!" {
             panic!("Invalid package!");
         } else {
-            let home = std::env::var("HOME").unwrap();
             //let path = format!("{}/.ppkg/downloads/", home); // Main path will be $HOME/.ppkg, also create a downloads directory
             //fs::create_dir(path).unwrap(); // TODO: Make this work somehow, for now users must make $HOME/.ppkg/downloads manually
 
