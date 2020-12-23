@@ -93,9 +93,9 @@ fn main() {
             std::io::stdin()
                 .read_line(&mut arch)
                 .expect("Failed to read user input.");
-            if arch == "x32" {
+            if arch.trim() == "x32" {
                 config.ghcli.package_url_32
-            } else if arch == "x64" {
+            } else if arch.trim() == "x64" {
                 config.ghcli.package_url_64
             } else {
                 panic!("You need to choose x32 or x64!");
