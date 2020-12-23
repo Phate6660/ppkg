@@ -75,7 +75,7 @@ fn main() {
         let url = if name == "Discord" {
             config.discord.package_url
         } else if name == "Firefox" {
-            println!("This package support 32-bit and 64-bit, please choose a version. (x32 or x64)");
+            println!("This package supports 32-bit and 64-bit, please choose a version. (x32 or x64)");
             let mut arch = String::new();
             std::io::stdin()
                 .read_line(&mut arch)
@@ -88,7 +88,7 @@ fn main() {
                 panic!("You need to choose x32 or x64!");
             }
         } else if name == "Github CLI" {
-            println!("This package support 32-bit and 64-bit, please choose a version. (x32 or x64)");
+            println!("This package supports 32-bit and 64-bit, please choose a version. (x32 or x64)");
             let mut arch = String::new();
             std::io::stdin()
                 .read_line(&mut arch)
