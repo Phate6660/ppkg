@@ -7,6 +7,7 @@ use std::path::Path;
 
 #[derive(Deserialize)]
 struct Config {
+    discord: Package,
     firefox32: Package,
     firefox64: Package,
     palemoon: Package,
@@ -48,7 +49,9 @@ fn main() {
     if matches.is_present("install") {
         let pkg = matches.value_of("install");
 
-        let name = if pkg == serde::export::Some("Firefox x32") {
+        let name = if pkg == serde::export::Some("Discord") {
+            config.discord.package_name
+        } else if pkg == serde::export::Some("Firefox x32") {
             config.firefox32.package_name
         } else if pkg == serde::export::Some("Firefox x64") {
             config.firefox64.package_name
@@ -58,7 +61,9 @@ fn main() {
             "Invalid Package!".to_string()
         };
 
-        let url = if name == "Firefox x32" {
+        let url = if name == "Discord" {
+            config.discord.package_url
+        } else if name == "Firefox x32" {
             config.firefox32.package_url
         } else if name == "Firefox x64" {
             config.firefox64.package_url

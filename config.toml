@@ -1,3 +1,9 @@
+[discord]
+package_name = "Discord"
+package_description = "A proprietary instant messaging platform. It is HIGHLY recommended to use BetterDiscord or Powercord."
+package_version = "0.0.13"
+package_url = "https://discord.com/api/download?platform=linux&format=tar.gz"
+
 [firefox32]
 package_name = "Firefox x32"
 package_description = "Not the best browser, but better than some other choices for sure."
