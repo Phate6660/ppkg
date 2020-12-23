@@ -5,6 +5,9 @@ It will initially be a binary package manager, but I plan on making it a hybrid.
 
 About the name: ppkg / Phate's Package Manager is a double entendre. Surely you can figure it out. ;)
 
+If anyone wants a package added, just let me know.<br>
+Issues, PRs, or even just messages on any platforms I'm on are appreciated!
+
 Prerequisites:
 - `mkdir -pv "$HOME/.ppkg/{downloads,opt}"`
 - `cp config.toml $HOME/.ppkg/`
