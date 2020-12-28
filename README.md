@@ -73,8 +73,8 @@ URL (x64): https://dl4.cdn.filezilla-project.org/client/FileZilla_3.51.0_x86_64-
 Name: Firefox
 Description: Not the best browser, but better than some other choices for sure.
 Version: 84.0.1
-URL (x32): https://download.mozilla.org/?product=firefox-latest-ssl&os=linux&lang=en-US
-URL (x64): https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US
+URL (x32): https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0.1/linux-i686/en-US/firefox-84.0.1.tar.bz2
+URL (x64): https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0.1/linux-x86_64/en-US/firefox-84.0.1.tar.bz2
 
 Name: Github CLI
 Description: The official CLI for Github.
