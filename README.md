@@ -14,6 +14,7 @@ Prerequisites:
 
 Current list of packages:
 - Discord
+- FileZilla
 - Firefox
 - Github CLI
 - Pale Moon
@@ -63,6 +64,12 @@ TODO: Prompt for BetterDiscord installation and install it if user agrees.
 Version: 0.0.13
 URL: https://discord.com/api/download?platform=linux&format=tar.gz
 
+Name: FileZilla
+Description: A FOSS FTP/SFTP/FTPS client.
+Version: 3.51.0
+URL (x32): https://dl4.cdn.filezilla-project.org/client/FileZilla_3.51.0_i686-linux-gnu.tar.bz2?h=l99fdW4NWUoX-YbpS-jiKg&x=1609166094
+URL (x64): https://dl4.cdn.filezilla-project.org/client/FileZilla_3.51.0_x86_64-linux-gnu.tar.bz2?h=kdlGbGvcG_AQ6K645kfAJQ&x=1609166094
+
 Name: Firefox
 Description: Not the best browser, but better than some other choices for sure.
 Version: 84.0.1
@@ -86,6 +93,7 @@ URL: https://linux.palemoon.org/datastore/release/palemoon-28.17.0.linux-x86_64-
 ```
 Packages installed:
 - Discord
+- FileZilla
 - Firefox
 - Pale Moon
 ```
