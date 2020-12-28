@@ -4,6 +4,13 @@ package_description = "A proprietary instant messaging platform. It is HIGHLY re
 package_version = "0.0.13"
 package_url = "https://dl.discordapp.net/apps/linux/0.0.13/discord-0.0.13.tar.gz"
 
+[filezilla]
+package_name = "FileZilla"
+package_description = "A FOSS FTP/SFTP/FTPS client."
+package_version = "3.51.0"
+package_url_32 = "https://dl4.cdn.filezilla-project.org/client/FileZilla_3.51.0_i686-linux-gnu.tar.bz2?h=l99fdW4NWUoX-YbpS-jiKg&x=1609166094"
+package_url_64 = "https://dl4.cdn.filezilla-project.org/client/FileZilla_3.51.0_x86_64-linux-gnu.tar.bz2?h=kdlGbGvcG_AQ6K645kfAJQ&x=1609166094"
+
 [firefox]
 package_name = "Firefox"
 package_description = "Not the best browser, but better than some other choices for sure."

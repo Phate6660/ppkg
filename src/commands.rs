@@ -12,6 +12,8 @@ pub fn install(config_path: &str, home: &str, matches: &ArgMatches) {
 
     let name = if pkg == serde::export::Some("Discord") {
         config.discord.package_name
+    } else if pkg == serde::export::Some("FileZilla") {
+        config.filezilla.package_name
     } else if pkg == serde::export::Some("Firefox") {
         config.firefox.package_name
     } else if pkg == serde::export::Some("Github CLI") {
@@ -24,6 +26,19 @@ pub fn install(config_path: &str, home: &str, matches: &ArgMatches) {
 
     let url = if name == "Discord" {
         config.discord.package_url
+    } else if name == "FileZilla" {
+        println!("This package supports 32-bit and 64-bit, please choose a version. (x32 or x64)");
+        let mut arch = String::new();
+        std::io::stdin()
+            .read_line(&mut arch)
+            .expect("Failed to read user input.");
+        if arch.trim() == "x32" {
+            config.filezilla.package_url_32
+        } else if arch.trim() == "x64" {
+            config.filezilla.package_url_64
+        } else {
+            panic!("You need to choose x32 or x64!");
+        }
     } else if name == "Firefox" {
         println!("This package supports 32-bit and 64-bit, please choose a version. (x32 or x64)");
         let mut arch = String::new();
@@ -109,6 +124,14 @@ pub fn list(config_path: &str, home: &str, matches: &ArgMatches) {
         );
         println!(
             "Name: {}\nDescription: {}\nVersion: {}\nURL (x32): {}\nURL (x64): {}\n",
+            config.filezilla.package_name,
+            config.filezilla.package_description,
+            config.filezilla.package_version,
+            config.filezilla.package_url_32,
+            config.filezilla.package_url_64,
+        );
+        println!(
+            "Name: {}\nDescription: {}\nVersion: {}\nURL (x32): {}\nURL (x64): {}\n",
             config.firefox.package_name,
             config.firefox.package_description,
             config.firefox.package_version,
@@ -133,12 +156,16 @@ pub fn list(config_path: &str, home: &str, matches: &ArgMatches) {
     } else if matches.is_present("installed") {
         let config: Config = toml::from_str(&std::fs::read_to_string(config_path).unwrap()).unwrap();
         let install_path_discord = format!("{}/.ppkg/opt/{}", home, config.discord.package_name);
+        let install_path_filezilla = format!("{}/.ppkg/opt/{}", home, config.filezilla.package_name);
         let install_path_firefox = format!("{}/.ppkg/opt/{}", home, config.firefox.package_name);
         let install_path_ghcli = format!("{}/.ppkg/opt/{}", home, config.ghcli.package_name);
         let install_path_palemoon = format!("{}/.ppkg/opt/{}", home, config.palemoon.package_name);
         println!("Packages installed:");
         if fs::metadata(install_path_discord).is_ok() {
             println!("- Discord");
+        }
+        if fs::metadata(install_path_filezilla).is_ok() {
+            println!("- FileZilla");
         }
         if fs::metadata(install_path_firefox).is_ok() {
             println!("- Firefox");
